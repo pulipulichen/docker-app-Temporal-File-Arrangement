@@ -30,9 +30,8 @@ async function moveFiles(baseTargetFolder, fileList) {
         groupedFiles[baseFolder].push({ ...file, HH });
     }
 
-    console.log(groupedFiles)
+    // console.log(groupedFiles)
 
-    let lastCurrentSubFolder;
     for (const baseFolder in groupedFiles) {
         const files = groupedFiles[baseFolder];
 
@@ -45,7 +44,7 @@ async function moveFiles(baseTargetFolder, fileList) {
         for (const file of files) {
             const fileTime = file.createdAt.getTime();
 
-            if (lastTime === null || fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
+            if (lastTime !== null && fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
                 currentSubFolder = `${baseFolder} ${file.HH}`;
             }
 
