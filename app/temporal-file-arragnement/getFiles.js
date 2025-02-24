@@ -8,7 +8,10 @@ const stat = util.promisify(fs.stat);
 const readdir = util.promisify(fs.readdir);
 
 // 取得所有檔案（排除 bundle）
-async function getFiles(dir, excludeDir, baseDir = '/input') {
+async function getFiles(dir, excludeDir, baseDir) {
+    if (!baseDir) {
+      baseDir = dir;
+    }
     let files = [];
     const items = await readdir(dir, { withFileTypes: true });
 
