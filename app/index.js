@@ -28,7 +28,7 @@ let main = async function () {
     // =================================================================
 
     try {
-        const files = await getFiles(__dirname, BUNDLE_FOLDER);
+        const files = await getFiles(directoryPath, BUNDLE_FOLDER);
         console.log(`Found ${files.length} files`);
         console.log(files)
 
