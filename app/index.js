@@ -39,7 +39,7 @@ let main = async function () {
         for (let i = 0; i < folders.length; i++) {
           await renameFolder(folders[i]);
         }
-        await cleanFolder(directoryPath)
+        await cleanFolder(directoryPath, BUNDLE_FOLDER)
         
         console.log("All files moved successfully.");
     } catch (err) {
