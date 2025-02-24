@@ -1,0 +1,59 @@
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+const ensureDir = require('./ensureDir')
+
+// const stat = util.promisify(fs.stat);
+// const mkdir = util.promisify(fs.mkdir);
+const rename = util.promisify(fs.rename);
+// const readdir = util.promisify(fs.readdir);
+
+
+// 搬移檔案
+async function moveFiles(fileList) {
+    const groupedFiles = {};
+
+    for (const file of fileList) {
+        const date = file.createdAt;
+        const YYYY = date.getFullYear();
+        const MM = String(date.getMonth() + 1).padStart(2, '0');
+        const DD = String(date.getDate()).padStart(2, '0');
+        const HH = String(date.getHours()).padStart(2, '0');
+
+        const baseFolder = path.join(__dirname, YYYY.toString(), MM, `${YYYY}${MM}${DD}`);
+
+        if (!groupedFiles[baseFolder]) {
+            groupedFiles[baseFolder] = [];
+        }
+
+        groupedFiles[baseFolder].push({ ...file, HH });
+    }
+
+    for (const baseFolder in groupedFiles) {
+        const files = groupedFiles[baseFolder];
+
+        // 依時間排序
+        files.sort((a, b) => a.createdAt - b.createdAt);
+
+        let lastTime = null;
+        let currentSubFolder = baseFolder;
+
+        for (const file of files) {
+            const fileTime = file.createdAt.getTime();
+
+            if (lastTime === null || fileTime - lastTime > 8 * 60 * 60 * 1000) {
+                currentSubFolder = `${baseFolder} ${file.HH}`;
+            }
+
+            await ensureDir(currentSubFolder);
+            const targetPath = path.join(currentSubFolder, path.basename(file.path));
+
+            await rename(file.path, targetPath);
+            console.log(`Moved: ${file.path} -> ${targetPath}`);
+
+            lastTime = fileTime;
+        }
+    }
+}
+
+module.exports = moveFiles
