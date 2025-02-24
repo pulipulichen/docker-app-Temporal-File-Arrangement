@@ -37,7 +37,7 @@ async function getFileCreationTime(filePath) {
 
         if (result.tags && result.tags.DateTimeOriginal) {
             let exifTime = new Date(result.tags.DateTimeOriginal * 1000);
-            if (!createdTime || createdTime > exifTime) {
+            if (exifTime.getFullYear() !== 1970 && (!createdTime || createdTime > exifTime)) {
               return exifTime
             }
         }
