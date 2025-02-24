@@ -16,6 +16,9 @@ const BUNDLE_FOLDER = 'bundle';
 async function getFileCreationTime(filePath) {
     const buffer = await readFile(filePath);
 
+    const stats = await stat(filePath);
+    console.log(stats)
+
     try {
         const parser = ExifParser.create(buffer);
         const result = parser.parse();
@@ -27,7 +30,7 @@ async function getFileCreationTime(filePath) {
         console.warn(`Failed to read EXIF data for ${filePath}: ${err.message}`);
     }
 
-    const stats = await stat(filePath);
+    // const stats = await stat(filePath);
     console.log(stats)
     return stats.birthtime;
 }
