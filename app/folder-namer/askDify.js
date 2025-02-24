@@ -67,7 +67,7 @@ async function executeWorkflow(document_id, yek, user, context) {
 
     // console.log('不行嗎？',)
 
-    console.log({document_id})
+    // console.log({document_id})
     let data = {
       inputs: {
         context,
@@ -81,12 +81,12 @@ async function executeWorkflow(document_id, yek, user, context) {
       user: user
     }
 
-    console.log(data)
+    // console.log(data)
     let headers = {
       Authorization: `Bearer ${yek}`,
       "Content-Type": "application/json"
     }
-    console.log(headers)
+    // console.log(headers)
 
     const response = await axios.post(
       'http://192.168.100.202/v1/workflows/run',
