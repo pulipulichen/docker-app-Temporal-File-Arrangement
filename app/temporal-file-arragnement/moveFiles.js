@@ -8,6 +8,8 @@ const ensureDir = require('./ensureDir')
 const rename = util.promisify(fs.rename);
 // const readdir = util.promisify(fs.readdir);
 
+const ShellExec = require('./../lib/ShellExec');
+
 const MIN_INTER_HOURS = 4
 
 // 搬移檔案
@@ -51,7 +53,10 @@ async function moveFiles(baseTargetFolder, fileList) {
             // const targetPath = path.join(currentSubFolder, path.basename(file.path));
             const targetPath = path.join(currentSubFolder, file.path);
             await ensureDir(currentSubFolder);
-            await rename(file.path, targetPath);
+            // await rename(file.path, targetPath);
+            const command = `mv "${file.path}" "${targetPath}"`
+            console.log(command);
+            // await ShellExec(command);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
 
             lastTime = fileTime;
