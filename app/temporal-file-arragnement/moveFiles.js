@@ -10,7 +10,7 @@ const rename = util.promisify(fs.rename);
 
 
 // 搬移檔案
-async function moveFiles(fileList) {
+async function moveFiles(baseTargetFolder, fileList) {
     const groupedFiles = {};
 
     for (const file of fileList) {
@@ -45,7 +45,7 @@ async function moveFiles(fileList) {
                 currentSubFolder = `${baseFolder} ${file.HH}`;
             }
 
-            const targetPath = path.join(currentSubFolder, path.basename(file.path));
+            const targetPath = path.join(baseTargetFolder, currentSubFolder, path.basename(file.path));
             // await ensureDir(currentSubFolder);
             // await rename(file.path, targetPath);
             console.log(`Moved: ${file.path} -> ${targetPath}`);

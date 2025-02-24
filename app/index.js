@@ -33,8 +33,8 @@ let main = async function () {
         console.log(files)
 
         // await ensureDir(BUNDLE_FOLDER);
-        await moveFiles(files);
-        // console.log("All files moved successfully.");
+        await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
+        console.log("All files moved successfully.");
     } catch (err) {
         console.error("Error:", err);
     }
