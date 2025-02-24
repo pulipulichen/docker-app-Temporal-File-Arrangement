@@ -8,6 +8,8 @@ const stat = util.promisify(fs.stat);
 // const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);
 
+const getFileCreationTime = require('./getFileCreationTime')
+
 // 取得所有檔案（排除 bundle）
 async function getFiles(dir, excludeDir, baseDir) {
     if (!baseDir) {
@@ -26,8 +28,8 @@ async function getFiles(dir, excludeDir, baseDir) {
                 files = files.concat(subFiles);
             }
         } else {
-            const stats = await stat(fullPath);
-            files.push({ path: relativePath, createdAt: stats.birthtime });
+            const createdAt = await getFileCreationTime(fullPath);
+            files.push({ path: relativePath, createdAt });
         }
     }
 
