@@ -45,7 +45,7 @@ async function moveFiles(baseTargetFolder, fileList) {
             const fileTime = file.createdAt.getTime();
 
             if (lastTime !== null && fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
-                currentSubFolder = `${baseFolder} ${file.HH}`;
+                currentSubFolder = `${baseFolder}-${file.HH}`;
             }
 
             // const targetPath = path.join(currentSubFolder, path.basename(file.path));
