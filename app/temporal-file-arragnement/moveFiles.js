@@ -67,8 +67,8 @@ async function moveFiles(baseTargetFolder, fileList) {
             console.log(`Moved: ${file.path} -> ${targetPath}`);
 
             
-            if (!outputFolders.includes(targetDir)) {
-                outputFolders.push(targetDir)
+            if (!outputFolders.includes(currentSubFolder)) {
+                outputFolders.push(currentSubFolder)
             }
 
             lastTime = fileTime;
