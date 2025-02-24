@@ -96,8 +96,8 @@ async function executeWorkflow(document_id, yek, user, context) {
       }
     );
 
-    // let output = response.data.data.outputs.text
-    let output = response.data.data
+    let output = response.data.data.outputs.text
+    // let output = response.data.data
     console.log('Upload successful:', output);
     return output;
   } catch (error) {
