@@ -29,8 +29,8 @@ async function getFileCreationTime(filePath) {
     if (stats.atime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.atime)) {
       createdTime = stats.atime
     }
-    console.log(filePath)
-    console.log(stats)
+    // console.log(filePath)
+    // console.log(stats)
 
     try {
         const parser = ExifParser.create(buffer);
@@ -43,7 +43,7 @@ async function getFileCreationTime(filePath) {
             }
         }
     } catch (err) {
-        console.warn(`Failed to read EXIF data for ${filePath}: ${err.message}`);
+        // console.warn(`Failed to read EXIF data for ${filePath}: ${err.message}`);
     }
 
     // const stats = await stat(filePath);
