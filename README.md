@@ -1,5 +1,8 @@
 # docker-app-Temporal-File-Arrangement
 
+https://pulipulichen.github.io/docker-app-Temporal-File-Arrangement/bin/tempo-file-arr.sh
+
+wget https://pulipulichen.github.io/docker-app-Temporal-File-Arrangement/bin/tempo-file-arr.sh -O /docker-app/tempo-file-arr.sh; chmod +x /docker-app/*.sh
 
 ## Resource
 

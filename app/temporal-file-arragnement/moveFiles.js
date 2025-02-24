@@ -33,7 +33,7 @@ async function moveFiles(baseTargetFolder, fileList) {
         groupedFiles[baseFolder].push({ ...file, HH });
     }
 
-    // console.log(groupedFiles)
+    console.log(groupedFiles)
 
     for (const baseFolder in groupedFiles) {
         const files = groupedFiles[baseFolder];
