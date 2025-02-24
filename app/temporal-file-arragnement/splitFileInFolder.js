@@ -43,6 +43,8 @@ async function walkEachFolder(directoryPath, callback) {
   }
 }
 
+const MIN_INTER_HOURS = 4
+
 async function splitFileInFolder(directoryPath) {
   await walkEachFolder(directoryPath, async (folderPath) => {
     let files = await getFiles(folderPath)
@@ -67,6 +69,7 @@ async function splitFileInFolder(directoryPath) {
         }
 
         if (currentSubFolder === baseFolder) {
+          lastTime = fileTime;
           continue
         }
 
