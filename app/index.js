@@ -11,6 +11,8 @@ const BUNDLE_FOLDER = '[bundle]'
 const getFiles = require('./temporal-file-arragnement/getFiles')
 const moveFiles = require('./temporal-file-arragnement/moveFiles')
 
+const renameFolder = require('./folder-namer/renameFolder')
+
 // -------------------------------------------------------------
 
 
@@ -32,7 +34,10 @@ let main = async function () {
         console.log(`Found ${files.length} files`);
         console.log(files)
 
-        await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
+        let folders = await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
+        for (let i = 0; i < folders.length; i++) {
+          await renameFolder(folders[i]);
+        }
         console.log("All files moved successfully.");
     } catch (err) {
         console.error("Error:", err);

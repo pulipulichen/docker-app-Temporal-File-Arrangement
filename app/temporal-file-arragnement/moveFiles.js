@@ -15,6 +15,7 @@ const MIN_INTER_HOURS = 4
 // 搬移檔案
 async function moveFiles(baseTargetFolder, fileList) {
     const groupedFiles = {};
+    let outputFolders = []
 
     for (const file of fileList) {
         const date = file.createdAt;
@@ -60,9 +61,16 @@ async function moveFiles(baseTargetFolder, fileList) {
             // await ShellExec(command);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
 
+            let targetDir = path.dirname(targetPath)
+            if (!outputFolders.includes(targetDir)) {
+                outputFolders.push(targetDir)
+            }
+
             lastTime = fileTime;
         }
     }
+
+    return outputFolders
 }
 
 module.exports = moveFiles
