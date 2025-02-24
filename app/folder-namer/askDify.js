@@ -68,27 +68,31 @@ async function executeWorkflow(document_id, yek, user, context) {
     // console.log('不行嗎？',)
 
     console.log({document_id})
+    let data = {
+      inputs: {
+        context,
+        'image': [{
+          type: "image",
+          "transfer_method": "local_file",
+          "upload_file_id": document_id
+        }]
+      },
+      "response_mode": "blocking",
+      user: user
+    }
+
+    console.log(data)
+    let headers = {
+      Authorization: `Bearer ${yek}`,
+      "Content-Type": "application/json"
+    }
+    console.log(headers)
 
     const response = await axios.post(
       'http://192.168.100.202/v1/workflows/run',
+      data,
       {
-        inputs: {
-          context,
-          'image': [{
-            type: "image",
-            "transfer_method": "local_file",
-            "upload_file_id": document_id
-          }]
-        },
-        "response_mode": "blocking",
-        user: user
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${yek}`,
-          "Content-Type": "application/json",
-          ...formData.getHeaders(),
-        },
+        headers
       }
     );
 
