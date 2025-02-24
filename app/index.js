@@ -28,13 +28,13 @@ let main = async function () {
     // =================================================================
 
     try {
-      await ensureDir(BUNDLE_FOLDER);
-
         const files = await getFiles(__dirname, BUNDLE_FOLDER);
         console.log(`Found ${files.length} files`);
+        console.log(files)
 
-        await moveFiles(files);
-        console.log("All files moved successfully.");
+        // await ensureDir(BUNDLE_FOLDER);
+        // await moveFiles(files);
+        // console.log("All files moved successfully.");
     } catch (err) {
         console.error("Error:", err);
     }
