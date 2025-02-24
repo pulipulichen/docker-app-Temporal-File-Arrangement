@@ -63,9 +63,10 @@ async function splitFileInFolder(directoryPath) {
     
     for (const file of files) {
         const fileTime = file.createdAt.getTime();
+        const HH = String(file.createdAt.getHours()).padStart(2, '0');
 
         if (lastTime !== null && fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
-            currentSubFolder = `${baseFolder}-${file.HH}`;
+            currentSubFolder = `${baseFolder}-${HH}`;
         }
 
         if (currentSubFolder === baseFolder) {
