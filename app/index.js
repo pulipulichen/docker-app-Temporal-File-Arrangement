@@ -38,14 +38,14 @@ let main = async function () {
         await getFilesAndMove(directoryPath, BUNDLE_FOLDER);
         // console.log(`Found ${files.length} files`);
         // console.log(files)
-
+        await cleanFolder(directoryPath, BUNDLE_FOLDER)
         await splitFileInFolder(path.join(directoryPath, BUNDLE_FOLDER), BUNDLE_FOLDER);
 
         // let folders = await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
         // for (let i = 0; i < folders.length; i++) {
         //   await renameFolder(folders[i]);
         // }
-        // await cleanFolder(directoryPath, BUNDLE_FOLDER)
+        
         
         // console.log("All files moved successfully.");
     } catch (err) {
