@@ -3,9 +3,11 @@ const path = require('path');
 const util = require('util');
 
 const readdir = util.promisify(fs.readdir);
+const rename = util.promisify(fs.rename);
 
 const getFiles = require('./getFiles')
 const isExcluded = require('./isExcluded')
+const ensureDir = require('./ensureDir')
 
 async function walkEachFolder(directoryPath, callback) {
   const yearFolders = await readdir(directoryPath, { withFileTypes: true });
@@ -44,8 +46,49 @@ async function walkEachFolder(directoryPath, callback) {
 async function splitFileInFolder(directoryPath) {
   await walkEachFolder(directoryPath, async (folderPath) => {
     let files = await getFiles(folderPath)
+    if (files.length < 2) {
+      return true
+    }
 
-    console.log(files)
+    files.sort((a, b) => a.createdAt - b.createdAt);
+
+
+    let lastTime = null;
+    let baseFolder = path.basename(folderPath);
+    let currentSubFolder = path.basename(folderPath);
+    
+    for (const file of files) {
+        const fileTime = file.createdAt.getTime();
+
+        if (lastTime !== null && fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
+            currentSubFolder = `${baseFolder}-${file.HH}`;
+        }
+
+        if (currentSubFolder === baseFolder) {
+          continue
+        }
+
+        // const targetPath = path.join(currentSubFolder, path.basename(file.path));
+        const sourcePath = path.join(folderPath, file.path);
+        const targetPath = path.join(path.dirname(folderPath), currentSubFolder, file.path);
+        
+        let targetDir = path.dirname(targetPath)
+        console.log(targetDir)
+        
+        await ensureDir(targetDir);
+        await rename(sourcePath, targetPath);
+        // const command = `mv "${sourcePath}" "${targetPath}"`
+        // console.log(command);
+        // await ShellExec(command);
+        console.log(`Moved: ${file.path} -> ${targetPath}`);
+
+        
+        // if (!outputFolders.includes(currentSubFolder)) {
+        //     outputFolders.push(currentSubFolder)
+        // }
+
+        lastTime = fileTime;
+    }
   })
 }
 
