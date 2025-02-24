@@ -17,6 +17,8 @@ async function moveFiles(baseTargetFolder, fileList) {
     const groupedFiles = {};
     let outputFolders = []
 
+    console.log(baseTargetFolder)
+
     for (const file of fileList) {
         const date = file.createdAt;
         const YYYY = date.getFullYear();
