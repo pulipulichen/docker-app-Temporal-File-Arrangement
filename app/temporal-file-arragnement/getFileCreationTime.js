@@ -28,6 +28,7 @@ async function getFileCreationTime(filePath) {
     }
 
     const stats = await stat(filePath);
+    console.log(stats)
     return stats.birthtime;
 }
 
