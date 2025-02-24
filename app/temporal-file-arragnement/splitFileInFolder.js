@@ -46,6 +46,7 @@ async function walkEachFolder(directoryPath, callback) {
 async function splitFileInFolder(directoryPath) {
   await walkEachFolder(directoryPath, async (folderPath) => {
     let files = await getFiles(folderPath)
+    console.log(files)
     if (files.length < 2) {
       return true
     }
