@@ -7,7 +7,7 @@ const fs = require('fs')
 
 const BUNDLE_FOLDER = '[bundle]'
 
-const ensureDir = require('./temporal-file-arragnement/ensureDir')
+// const ensureDir = require('./temporal-file-arragnement/ensureDir')
 const getFiles = require('./temporal-file-arragnement/getFiles')
 const moveFiles = require('./temporal-file-arragnement/moveFiles')
 
