@@ -45,7 +45,7 @@ let main = async function () {
     } catch (err) {
         console.error("Error:", err);
     }
-    await ShellExec(`sudo chmod 777 -R /input`)
+    // await ShellExec(`sudo chmod 777 -R /input`)
   }
 }
 
