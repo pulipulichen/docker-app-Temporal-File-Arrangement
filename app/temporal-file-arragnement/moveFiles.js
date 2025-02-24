@@ -45,10 +45,9 @@ async function moveFiles(fileList) {
                 currentSubFolder = `${baseFolder} ${file.HH}`;
             }
 
-            await ensureDir(currentSubFolder);
             const targetPath = path.join(currentSubFolder, path.basename(file.path));
-
-            await rename(file.path, targetPath);
+            // await ensureDir(currentSubFolder);
+            // await rename(file.path, targetPath);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
 
             lastTime = fileTime;
