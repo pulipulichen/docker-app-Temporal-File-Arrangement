@@ -6,10 +6,13 @@ const extractFileLocation = require('./extractFileLocation')
 const getFolderContext = require('./getFolderContext')
 const askDify = require('./askDify')
 
+const path = require('path')
 
 async function renameFolder(directoryPath) {
 
-  // console.log(directoryPath)
+  console.log(`================================================================`)
+  console.log(directoryPath)
+  console.log(`================================================================`)
   // return false
 
   if (isNamedFolder(directoryPath)) {
