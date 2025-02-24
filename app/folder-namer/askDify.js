@@ -7,12 +7,12 @@ const path = require('path');
 
 const API_HOST = '192.168.100.202';
 const API_PATH = '/v1/chat-messages';
-const API_KEY = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API key
+const YEK = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API key
 
 const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
 
 
-async function uploadFile(filePath, apiKey, user) {
+async function uploadFile(filePath, yek, user) {
   try {
     const fileStream = fs.createReadStream(filePath);
     const formData = new FormData();
@@ -40,7 +40,7 @@ async function uploadFile(filePath, apiKey, user) {
       formData,
       {
         headers: {
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${yek}`,
           ...formData.getHeaders(),
         },
       }
@@ -55,7 +55,7 @@ async function uploadFile(filePath, apiKey, user) {
 }
 
 
-async function executeWorkflow(document_id, apiKey, user, context) {
+async function executeWorkflow(document_id, yek, user, context) {
   try {
     // const formData = new FormData();
 
@@ -85,7 +85,7 @@ async function executeWorkflow(document_id, apiKey, user, context) {
       },
       {
         headers: {
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${yek}`,
           "Content-Type": "application/json",
           // ...formData.getHeaders(),
         },
@@ -103,8 +103,8 @@ async function executeWorkflow(document_id, apiKey, user, context) {
 }
 
 async function askDify(filePath, context) {
-  let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
-  return await executeWorkflow(document_id, API_KEY, 'abc-123', context);
+  let document_id = await uploadFile(filePath, YEK, 'abc-123')
+  return await executeWorkflow(document_id, YEK, 'abc-123', context);
 }
 
 module.exports = askDify
