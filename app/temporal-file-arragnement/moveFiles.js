@@ -20,7 +20,7 @@ async function moveFiles(baseTargetFolder, fileList) {
         const DD = String(date.getDate()).padStart(2, '0');
         const HH = String(date.getHours()).padStart(2, '0');
 
-        const baseFolder = path.join(__dirname, YYYY.toString(), MM, `${YYYY}${MM}${DD}`);
+        const baseFolder = path.join(baseTargetFolder, YYYY.toString(), MM, `${YYYY}${MM}${DD}`);
 
         if (!groupedFiles[baseFolder]) {
             groupedFiles[baseFolder] = [];
@@ -45,7 +45,7 @@ async function moveFiles(baseTargetFolder, fileList) {
                 currentSubFolder = `${baseFolder} ${file.HH}`;
             }
 
-            const targetPath = path.join(baseTargetFolder, currentSubFolder, path.basename(file.path));
+            const targetPath = path.join(currentSubFolder, path.basename(file.path));
             // await ensureDir(currentSubFolder);
             // await rename(file.path, targetPath);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
