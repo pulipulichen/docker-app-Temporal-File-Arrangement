@@ -16,6 +16,7 @@ function extractDateFromFilename(filename) {
   // Define regex patterns for different formats
   const patterns = [
       /^(\d{4})-(\d{2})-(\d{2})_(\d{2})\.(\d{2})\.(\d{2})/, // Format: 2024-08-31_03.37.52.jpg
+      // /^IMG_(\d{8})_(\d{9})/, // Format: IMG_20240628_170635445.jpg
       /^(\d{4})(\d{2})(\d{2})/ // Format: 20240831 aaa.jpg
   ];
 
@@ -64,7 +65,9 @@ async function getFileCreationTime(filePath) {
 
     let fileNameTime = extractDateFromFilename(path.basename(filePath))
     if (fileNameTime && fileNameTime < createdTime) {
-      createdTime = fileNameTime
+      if ((createdTime.getTime() - fileNameTime.getTime()) > 1000 * 60 * 60 * 24 * 60) {
+        createdTime = fileNameTime
+      }
     }
 
     // console.log(filePath)
