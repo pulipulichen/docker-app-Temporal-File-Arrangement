@@ -18,6 +18,8 @@ const cleanFolder = require('./folder-namer/cleanFolder')
 const getFilesAndMove = require('./temporal-file-arragnement/getFilesAndMove')
 const splitFileInFolder = require('./temporal-file-arragnement/splitFileInFolder')
 
+const walkEachFolder = require('./temporal-file-arragnement/walkEachFolder')
+
 // -------------------------------------------------------------
 
 
@@ -40,6 +42,10 @@ let main = async function () {
         // console.log(files)
         await cleanFolder(directoryPath, BUNDLE_FOLDER)
         await splitFileInFolder(path.join(directoryPath, BUNDLE_FOLDER), BUNDLE_FOLDER);
+
+        await walkEachFolder(path.join(directoryPath, BUNDLE_FOLDER), async (folderPath) => {
+          await renameFolder(folderPath)
+        })
 
         // let folders = await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
         // for (let i = 0; i < folders.length; i++) {
