@@ -9,8 +9,8 @@ const askDify = require('./askDify')
 
 async function renameFolder(directoryPath) {
 
-  console.log(directoryPath)
-  return false
+  // console.log(directoryPath)
+  // return false
 
   if (isNamedFolder(directoryPath)) {
     return false

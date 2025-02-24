@@ -10,7 +10,7 @@ async function ensureDir(dir) {
         // await mkdir(dir, { recursive: true });
         fs.mkdirSync(dir, { recursive: true });
     }
-    console.log('Created directory: ' + dir);
+    // console.log('Created directory: ' + dir);
 }
 
 module.exports = ensureDir
