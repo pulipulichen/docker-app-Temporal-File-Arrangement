@@ -9,6 +9,7 @@ const stat = util.promisify(fs.stat);
 const readdir = util.promisify(fs.readdir);
 
 const getFileCreationTime = require('./getFileCreationTime')
+const isExcluded = require('./isExcluded')
 
 // 取得所有檔案（排除 bundle）
 async function getFiles(dir, excludeDir, baseDir) {
@@ -19,6 +20,10 @@ async function getFiles(dir, excludeDir, baseDir) {
     const items = await readdir(dir, { withFileTypes: true });
 
     for (const item of items) {
+        if (isExcluded(item.name)) {
+          continue
+        }
+
         const fullPath = path.join(dir, item.name);
         const relativePath = path.relative(baseDir, fullPath);
 
