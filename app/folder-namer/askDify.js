@@ -27,7 +27,7 @@ async function uploadFile(filePath, yek, user) {
     // console.log(filePath)
     // console.log(contentType)
 
-    formData.append('file', fileStream, {
+    formData.append('image', fileStream, {
       contentType: contentType,
       filename: path.basename(filePath),
     });
