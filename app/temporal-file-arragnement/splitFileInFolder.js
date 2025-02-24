@@ -7,6 +7,7 @@ const rename = util.promisify(fs.rename);
 const getFiles = require('./getFiles')
 const ensureDir = require('./ensureDir')
 
+const walkEachFolder = require('./walkEachFolder')
 
 const MIN_INTER_HOURS = 4
 
