@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
+const ExifParser = require('exif-parser');
 
 const stat = util.promisify(fs.stat);
 // const mkdir = util.promisify(fs.mkdir);

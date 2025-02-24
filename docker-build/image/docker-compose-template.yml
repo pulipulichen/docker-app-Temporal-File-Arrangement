@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-app:docker-app-Temporal-File-Arrangement-20250224.104707
+    image: pudding/docker-app:docker-app-Temporal-File-Arrangement-20250224.105939
     tty: true
     command: node /app/index.js "/input/__INPUT__"
     environment:
