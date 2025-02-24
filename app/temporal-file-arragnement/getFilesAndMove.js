@@ -40,8 +40,8 @@ async function getFilesAndMove(dir, excludeDir, baseDir) {
             // files.push({ path: relativePath, createdAt });
 
             const YYYY = createdAt.getFullYear();
-            const MM = String(date.getMonth() + 1).padStart(2, '0');
-            const DD = String(date.getDate()).padStart(2, '0');
+            const MM = String(createdAt.getMonth() + 1).padStart(2, '0');
+            const DD = String(createdAt.getDate()).padStart(2, '0');
             
             const baseFolder = path.join(baseTargetFolder, YYYY.toString(), MM, `${YYYY}${MM}${DD}`);
 
