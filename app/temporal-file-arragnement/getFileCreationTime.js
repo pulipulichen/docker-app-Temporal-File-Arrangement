@@ -17,22 +17,38 @@ async function getFileCreationTime(filePath) {
     const buffer = await readFile(filePath);
 
     const stats = await stat(filePath);
-    console.log(stats)
+    let createdTime = stats.mtime
+    if (!createdTime || createdTime > stats.birthtime) {
+      createdTime = stats.birthtime
+    }
+
+    if (!createdTime || createdTime > stats.ctime) {
+      createdTime = stats.ctime
+    }
+
+    if (!createdTime || createdTime > stats.atime) {
+      createdTime = stats.atime
+    }
+    // console.log(stats)
 
     try {
         const parser = ExifParser.create(buffer);
         const result = parser.parse();
 
         if (result.tags && result.tags.DateTimeOriginal) {
-            return new Date(result.tags.DateTimeOriginal * 1000);
+            let exifTime = new Date(result.tags.DateTimeOriginal * 1000);
+            if (!createdTime || createdTime > exifTime) {
+              return exifTime
+            }
         }
     } catch (err) {
         console.warn(`Failed to read EXIF data for ${filePath}: ${err.message}`);
     }
 
     // const stats = await stat(filePath);
-    console.log(stats)
-    return stats.birthtime;
+    // console.log(stats)
+    // return stats.birthtime;
+    return createdTime
 }
 
 
