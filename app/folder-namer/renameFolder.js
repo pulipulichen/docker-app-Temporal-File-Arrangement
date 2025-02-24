@@ -7,6 +7,7 @@ const getFolderContext = require('./getFolderContext')
 const askDify = require('./askDify')
 
 const path = require('path')
+const fs = require('fs')
 
 async function renameFolder(directoryPath) {
 
