@@ -30,7 +30,7 @@ let main = async function () {
     try {
         const files = await getFiles(directoryPath, BUNDLE_FOLDER);
         console.log(`Found ${files.length} files`);
-        console.log(files)
+        // console.log(files)
 
         // await ensureDir(BUNDLE_FOLDER);
         await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);

@@ -8,6 +8,7 @@ const ensureDir = require('./ensureDir')
 const rename = util.promisify(fs.rename);
 // const readdir = util.promisify(fs.readdir);
 
+const MIN_INTER_HOURS = 4
 
 // 搬移檔案
 async function moveFiles(baseTargetFolder, fileList) {
@@ -41,11 +42,12 @@ async function moveFiles(baseTargetFolder, fileList) {
         for (const file of files) {
             const fileTime = file.createdAt.getTime();
 
-            if (lastTime === null || fileTime - lastTime > 8 * 60 * 60 * 1000) {
+            if (lastTime === null || fileTime - lastTime > MIN_INTER_HOURS * 60 * 60 * 1000) {
                 currentSubFolder = `${baseFolder} ${file.HH}`;
             }
 
-            const targetPath = path.join(currentSubFolder, path.basename(file.path));
+            // const targetPath = path.join(currentSubFolder, path.basename(file.path));
+            const targetPath = path.join(currentSubFolder, file.path);
             // await ensureDir(currentSubFolder);
             // await rename(file.path, targetPath);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
