@@ -22,7 +22,7 @@ async function cleanFolder (targetDir, excludeDir) {
               }
 
               if (stats.isDirectory() && file !== excludeDir) {
-                  fs.rm(filePath, { recursive: true, force: true }, (err) => {
+                  fs.rmdir(filePath, { recursive: true, force: true }, (err) => {
                       if (err) {
                         reject(`Error removing ${filePath}: ${err}`);
                       } else {
