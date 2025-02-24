@@ -29,7 +29,8 @@ async function getFileCreationTime(filePath) {
     if (stats.atime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.atime)) {
       createdTime = stats.atime
     }
-    // console.log(stats)
+    console.log(filePath)
+    console.log(stats)
 
     try {
         const parser = ExifParser.create(buffer);
