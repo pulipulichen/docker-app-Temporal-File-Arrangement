@@ -27,7 +27,7 @@ async function uploadFile(filePath, yek, user) {
     // console.log(filePath)
     // console.log(contentType)
 
-    formData.append('image', fileStream, {
+    formData.append('file', fileStream, {
       contentType: contentType,
       filename: path.basename(filePath),
     });
@@ -87,7 +87,7 @@ async function executeWorkflow(document_id, yek, user, context) {
         headers: {
           Authorization: `Bearer ${yek}`,
           "Content-Type": "application/json",
-          // ...formData.getHeaders(),
+          ...formData.getHeaders(),
         },
       }
     );
