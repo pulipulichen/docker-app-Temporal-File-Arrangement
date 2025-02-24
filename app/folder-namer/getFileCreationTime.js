@@ -18,15 +18,15 @@ async function getFileCreationTime(filePath) {
 
     const stats = await stat(filePath);
     let createdTime = stats.mtime
-    if (!createdTime || createdTime > stats.birthtime) {
+    if (stats.birthtime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.birthtime))  {
       createdTime = stats.birthtime
     }
 
-    if (!createdTime || createdTime > stats.ctime) {
+    if (stats.ctime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.ctime)) {
       createdTime = stats.ctime
     }
 
-    if (!createdTime || createdTime > stats.atime) {
+    if (stats.atime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.atime)) {
       createdTime = stats.atime
     }
     // console.log(stats)

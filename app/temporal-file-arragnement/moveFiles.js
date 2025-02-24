@@ -56,14 +56,17 @@ async function moveFiles(baseTargetFolder, fileList) {
             // const targetPath = path.join(currentSubFolder, path.basename(file.path));
             const targetPath = path.join(currentSubFolder, file.path);
             const sourcePath = path.join(path.dirname(baseTargetFolder), file.path);
-            await ensureDir(path.dirname(targetPath));
+            let targetDir = path.dirname(targetPath)
+            console.log(targetDir)
+            
+            await ensureDir(targetDir);
             await rename(sourcePath, targetPath);
             // const command = `mv "${sourcePath}" "${targetPath}"`
             // console.log(command);
             // await ShellExec(command);
             console.log(`Moved: ${file.path} -> ${targetPath}`);
 
-            let targetDir = path.dirname(targetPath)
+            
             if (!outputFolders.includes(targetDir)) {
                 outputFolders.push(targetDir)
             }
