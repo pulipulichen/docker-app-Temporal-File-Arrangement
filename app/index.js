@@ -12,6 +12,7 @@ const getFiles = require('./temporal-file-arragnement/getFiles')
 const moveFiles = require('./temporal-file-arragnement/moveFiles')
 
 const renameFolder = require('./folder-namer/renameFolder')
+const cleanFolder = require('./folder-namer/cleanFolder')
 
 // -------------------------------------------------------------
 
@@ -38,10 +39,13 @@ let main = async function () {
         for (let i = 0; i < folders.length; i++) {
           await renameFolder(folders[i]);
         }
+        await cleanFolder(directoryPath)
+        
         console.log("All files moved successfully.");
     } catch (err) {
         console.error("Error:", err);
     }
+    await ShellExec(`chmod 777 -R /input`)
   }
 }
 

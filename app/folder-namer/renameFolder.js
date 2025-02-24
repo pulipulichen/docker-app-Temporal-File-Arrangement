@@ -1,5 +1,5 @@
 const isNamedFolder = require('./isNamedFolder')
-const getFiles = require('./getFiles')
+const getFiles = require('./../temporal-file-arragnement/getFiles')
 const findMiddleFile = require('./findMiddleFile')
 const extractFileLocation = require('./extractFileLocation')
 
