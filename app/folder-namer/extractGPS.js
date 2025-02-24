@@ -2,17 +2,21 @@ const fs = require('fs');
 const ExifParser = require('exif-parser');
 
 function extractGPS(filePath) {
-    const buffer = fs.readFileSync(filePath);
-    const parser = ExifParser.create(buffer);
-    const result = parser.parse();
-    // console.log(result)
-    if (result.tags.GPSLatitude && result.tags.GPSLongitude) {
-        // const latitude = convertDMSToDD(result.tags.GPSLatitude, result.tags.GPSLatitudeRef);
-        // const longitude = convertDMSToDD(result.tags.GPSLongitude, result.tags.GPSLongitudeRef);
+    try {
+        const buffer = fs.readFileSync(filePath);
+        const parser = ExifParser.create(buffer);
+        const result = parser.parse();
+        // console.log(result)
+        if (result.tags.GPSLatitude && result.tags.GPSLongitude) {
+            // const latitude = convertDMSToDD(result.tags.GPSLatitude, result.tags.GPSLatitudeRef);
+            // const longitude = convertDMSToDD(result.tags.GPSLongitude, result.tags.GPSLongitudeRef);
 
-        const latitude = result.tags.GPSLatitude
-        const longitude = result.tags.GPSLongitude
-        return { latitude, longitude };
+            const latitude = result.tags.GPSLatitude
+            const longitude = result.tags.GPSLongitude
+            return { latitude, longitude };
+        }
+    } catch (err) {
+        // console.warn(`Failed to read EXIF data for ${filePath}: ${err.message}`);
     }
 
     return null;
