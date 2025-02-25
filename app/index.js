@@ -37,6 +37,7 @@ let main = async function () {
     // =================================================================
 
     try {
+      console.log(`Start getFilesAndMove`);
         await getFilesAndMove(directoryPath, BUNDLE_FOLDER);
         console.log(`Finish getFilesAndMove`);
         // console.log(files)
