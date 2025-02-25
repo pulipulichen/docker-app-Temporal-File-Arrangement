@@ -38,14 +38,18 @@ let main = async function () {
 
     try {
         await getFilesAndMove(directoryPath, BUNDLE_FOLDER);
-        // console.log(`Found ${files.length} files`);
+        console.log(`Finish getFilesAndMove`);
         // console.log(files)
         await cleanFolder(directoryPath, BUNDLE_FOLDER)
+        console.log(`Finish cleanFolder`);
+
         await splitFileInFolder(path.join(directoryPath, BUNDLE_FOLDER), BUNDLE_FOLDER);
+        console.log(`Finish splitFileInFolder`);
 
         await walkEachFolder(path.join(directoryPath, BUNDLE_FOLDER), async (folderPath) => {
           await renameFolder(folderPath)
         })
+        console.log(`Finish renameFolder`);
 
         // let folders = await moveFiles(path.join(directoryPath, BUNDLE_FOLDER), files);
         // for (let i = 0; i < folders.length; i++) {
