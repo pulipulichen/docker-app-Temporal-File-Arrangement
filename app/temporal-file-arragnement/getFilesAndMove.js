@@ -22,7 +22,7 @@ async function getFilesAndMove(dir, excludeDir, baseDir) {
     const items = await readdir(dir, { withFileTypes: true });
 
     for (const item of items) {
-        console.log(item.name)
+        console.log(dir, item.name)
         if (isExcluded(item.name)) {
           continue
         }
