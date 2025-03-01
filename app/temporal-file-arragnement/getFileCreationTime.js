@@ -20,6 +20,7 @@ function extractDateFromFilename(filename) {
       // /^(\d{4})(\d{2})(\d{2})/ // Format: 20240831 aaa.jpg
       /^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/,  // Format: 20240919_152647.jpg
       /^(\d{4})(\d{2})(\d{2})\s/,  // Format: 20240919 測試.jpg
+      /^(\d{4})(\d{2})(\d{2})$/,  // Format: 20240919
       /^Screenshot_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/  // Format: Screenshot_20250301_153251_Settings.png
   ];
 
