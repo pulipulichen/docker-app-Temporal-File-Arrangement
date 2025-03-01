@@ -16,7 +16,7 @@ async function findMiddleFile(files, directoryPath) {
   }
 
   if (files.length === 1) {
-    return files[0].path
+    return path.join(directoryPath, files[0].path)
   }
 
   // 依建立時間排序
