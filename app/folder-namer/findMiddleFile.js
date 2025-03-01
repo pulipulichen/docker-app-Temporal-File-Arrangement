@@ -1,6 +1,7 @@
 const isReadableFileType = require('./isReadableFileType')
 
 const getThumbnailFile = require('./getThumbnailFile')
+const path = require('path')
 
 /**
  * 找出建立時間最中間的檔案

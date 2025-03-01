@@ -61,15 +61,15 @@ async function getFileCreationTime(filePath) {
 
     const stats = await stat(filePath);
     let createdTime = stats.mtime
-    if (stats.birthtime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.birthtime))  {
+    if (stats.birthtime.getFullYear() > 1970 && (!createdTime || createdTime > stats.birthtime))  {
       createdTime = stats.birthtime
     }
 
-    if (stats.ctime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.ctime)) {
+    if (stats.ctime.getFullYear() > 1970 && (!createdTime || createdTime > stats.ctime)) {
       createdTime = stats.ctime
     }
 
-    if (stats.atime.getFullYear() !== 1970 && (!createdTime || createdTime > stats.atime)) {
+    if (stats.atime.getFullYear() > 1970 && (!createdTime || createdTime > stats.atime)) {
       createdTime = stats.atime
     }
 
@@ -89,7 +89,7 @@ async function getFileCreationTime(filePath) {
 
         if (result.tags && result.tags.DateTimeOriginal) {
             let exifTime = new Date(result.tags.DateTimeOriginal * 1000);
-            if (exifTime.getFullYear() !== 1970 && (!createdTime || createdTime > exifTime)) {
+            if (exifTime.getFullYear() > 1970 && (!createdTime || createdTime > exifTime)) {
               return exifTime
             }
         }
