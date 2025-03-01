@@ -9,6 +9,8 @@ const askDify = require('./askDify')
 const path = require('path')
 const fs = require('fs')
 
+const countFilesInFolder = require('./countFilesInFolder')
+
 async function renameFolder(directoryPath) {
 
   console.log(`================================================================`)
@@ -70,9 +72,19 @@ ${folderContext}`)
     // await askDify()
 
     if (askResult && askResult.length > 5) {
-      fs.renameSync(directoryPath, directoryPath + ' ' + askResult)
-    }
+      let renamedFolderPath = directoryPath + ' ' + askResult
+      let renamedFolderName = path.basename(renamedFolderPath)
 
+      if (fs.existsSync(path.join(directoryPath, renamedFolderName)) && 
+          (await countFilesInFolder(directoryPath)).length === 1) {
+          fs.renameSync(path.join(directoryPath, renamedFolderName), path.join(path.dirname(directoryPath), renamedFolderName))
+          fs.rmdirSync(directoryPath)
+      }
+      else {
+        fs.renameSync(directoryPath, renamedFolderPath)
+      }
+    }
+    
     // =================================================================
   } catch (err) {
       console.error("Error:", err);

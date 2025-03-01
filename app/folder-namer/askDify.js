@@ -109,9 +109,19 @@ async function executeWorkflow(document_id, yek, user, context) {
   }
 }
 
+const NAMED_PATTERN = /^(\d{4})(\d{2})(\d{2})\s/
+
 async function askDify(filePath, context) {
   // console.log('Test ok: ', filePath);
-  // return ''
+  let pathParts = filePath.split('/');
+  for (let i = pathParts.length - 2; i >= 0; i--) {
+    const match = pathParts[i].match(NAMED_PATTERN);
+    if (match) {
+      return pathParts[i].slice(9).trim()
+    }
+  }
+
+  return ''
 
   let document_id = await uploadFile(filePath, YEK, USER_ID)
   return await executeWorkflow(document_id, YEK, USER_ID, context);
