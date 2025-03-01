@@ -42,4 +42,4 @@ function removeEmptyDirectories(directoryPath) {
 // const targetDirectory = '/path/to/your/directory'; // 請修改成你的目標資料夾
 // removeEmptySubdirectories(targetDirectory);
 
-module.exports = removeEmptySubdirectories
+module.exports = removeEmptyDirectories
