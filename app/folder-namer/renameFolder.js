@@ -78,10 +78,10 @@ ${folderContext}`)
         '檢查路徑': path.join(directoryPath, renamedFolderName),
         '檢查路徑存在': fs.existsSync(path.join(directoryPath, renamedFolderName)),
         '原始路徑': directoryPath,
-        '原始路徑檔案': (await countFilesInFolder(directoryPath)).length
+        '原始路徑檔案': (await countFilesInFolder(directoryPath))
       })
       if (fs.existsSync(path.join(directoryPath, renamedFolderName)) && 
-          (await countFilesInFolder(directoryPath)).length === 1) {
+          (await countFilesInFolder(directoryPath)) === 1) {
           fs.renameSync(path.join(directoryPath, renamedFolderName), path.join(path.dirname(directoryPath), renamedFolderName))
           fs.rmdirSync(directoryPath)
           console.log('移動目錄：', path.join(path.dirname(directoryPath), renamedFolderName))
