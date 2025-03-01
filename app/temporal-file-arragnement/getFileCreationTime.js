@@ -19,6 +19,7 @@ function extractDateFromFilename(filename) {
       /^IMG_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})(\d{3})/, // Format: IMG_20240628_170635445.jpg
       // /^(\d{4})(\d{2})(\d{2})/ // Format: 20240831 aaa.jpg
       /^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/,  // Format: 20240919_152647.jpg
+      /^(\d{4})(\d{2})(\d{2})\s/,  // Format: 20240919 測試.jpg
       /^Screenshot_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/  // Format: Screenshot_20250301_153251_Settings.png
   ];
 
@@ -73,12 +74,19 @@ async function getFileCreationTime(filePath) {
       createdTime = stats.atime
     }
 
-    let fileNameTime = extractDateFromFilename(path.basename(filePath))
-    if (fileNameTime && fileNameTime < createdTime) {
-      if ((createdTime.getTime() - fileNameTime.getTime()) > 1000 * 60 * 60 * 24 * 60) {
-        createdTime = fileNameTime
+    let pathParts = filePath.split('/')
+    for (let i = pathParts.length - 1; i >= 0; i--) {
+      let name = pathParts[i]
+
+      let fileNameTime = extractDateFromFilename(name)
+      if (fileNameTime && fileNameTime < createdTime) {
+        let interval = (createdTime.getTime() - fileNameTime.getTime())
+        if (interval > 1000 * 60 * 60 * 24 * 60) {
+          createdTime = fileNameTime
+        }
       }
     }
+      
 
     // console.log(filePath)
     // console.log(stats)
