@@ -21,10 +21,11 @@ async function uploadFile(filePath, yek, user) {
     const fileStream = fs.createReadStream(filePath);
     const formData = new FormData();
 
-    const ext = path.extname(filePath).toLocaleLowerCase()
-    console.log(ext, isReadableFileType(ext))
-    if (isReadableFileType(ext)) {
+    // const ext = path.extname(filePath).toLocaleLowerCase()
+    console.log(isReadableFileType(filePath))
+    if (isReadableFileType(filePath)) {
       // const fileExtension = path.extname(filePath).slice(1).toLowerCase();
+      const ext = path.extname(filePath).toLocaleLowerCase()
       let contentType = mime.lookup(ext)
       if (contentType !== false) {
         formData.append('file', fileStream, {
