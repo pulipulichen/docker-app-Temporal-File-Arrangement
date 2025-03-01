@@ -74,7 +74,12 @@ ${folderContext}`)
     if (askResult && askResult.length > 5) {
       let renamedFolderPath = directoryPath + ' ' + askResult
       let renamedFolderName = path.basename(renamedFolderPath)
-
+      console.log({
+        '檢查路徑': path.join(directoryPath, renamedFolderName),
+        '檢查路徑存在': fs.existsSync(path.join(directoryPath, renamedFolderName)),
+        '原始路徑': directoryPath,
+        '原始路徑檔案': (await countFilesInFolder(directoryPath)).length
+      })
       if (fs.existsSync(path.join(directoryPath, renamedFolderName)) && 
           (await countFilesInFolder(directoryPath)).length === 1) {
           fs.renameSync(path.join(directoryPath, renamedFolderName), path.join(path.dirname(directoryPath), renamedFolderName))
