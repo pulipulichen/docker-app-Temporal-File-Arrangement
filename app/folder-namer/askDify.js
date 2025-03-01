@@ -7,30 +7,30 @@ const path = require('path');
 
 const API_HOST = '192.168.100.202';
 const API_PATH = '/v1/chat-messages';
-const YEK = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API key
+const YEK = 'app-oNLncwOFIZ0rO2sxH237amkd'
 
 const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
+const mime = require('mime-types')
 
+const isReadableFileType = require('./isReadableFileType')
 
 async function uploadFile(filePath, yek, user) {
   try {
     const fileStream = fs.createReadStream(filePath);
     const formData = new FormData();
 
-    const fileExtension = path.extname(filePath).slice(1).toLowerCase();
-    let contentType = `image/${fileExtension}`;
-
-    if (!['png', 'jpeg', 'jpg', 'webp', 'gif'].includes(fileExtension)) {
-      throw new Error("Unsupported file type. Please use png, jpeg, jpg, webp, or gif.");
+    const ext = path.extname(filePath).toLocaleLowerCase()
+    if (isReadableFileType(ext)) {
+      // const fileExtension = path.extname(filePath).slice(1).toLowerCase();
+      let contentType = mime.lookup(ext)
+      if (contentType !== false) {
+        formData.append('file', fileStream, {
+          contentType: contentType,
+          filename: path.basename(filePath),
+        });
+      }
     }
-
-    // console.log(filePath)
-    // console.log(contentType)
-
-    formData.append('file', fileStream, {
-      contentType: contentType,
-      filename: path.basename(filePath),
-    });
+      
     formData.append('user', user);
 
     // console.log('不行嗎？',)
@@ -48,7 +48,8 @@ async function uploadFile(filePath, yek, user) {
 
     // console.log('Upload successful:', response.data);
     return response.data.id;
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Upload failed:', error.response ? error.response.data : error.message);
     throw error; // Re-throw the error to be handled by the caller, if needed
   }
@@ -107,6 +108,9 @@ async function executeWorkflow(document_id, yek, user, context) {
 }
 
 async function askDify(filePath, context) {
+  console.log('Test ok: ', filePath);
+  return ''
+  
   let document_id = await uploadFile(filePath, YEK, 'abc-123')
   return await executeWorkflow(document_id, YEK, 'abc-123', context);
 }

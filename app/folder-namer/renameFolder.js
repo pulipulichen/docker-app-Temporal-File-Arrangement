@@ -29,10 +29,10 @@ async function renameFolder(directoryPath) {
 
     // =================================================================
 
-    let middleFile = await findMiddleFile(files)
-    if (middleFile) {
-      middleFile = path.join(directoryPath, middleFile)
-    }
+    let middleFile = await findMiddleFile(files, directoryPath)
+    // if (middleFile) {
+    //   middleFile = path.join(directoryPath, middleFile)
+    // }
     console.log(`Middle file: ${middleFile}`)
 
     // =================================================================

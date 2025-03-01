@@ -44,7 +44,7 @@ async function splitFileInFolder(directoryPath) {
         const targetPath = path.join(path.dirname(folderPath), currentSubFolder, file.path);
         
         let targetDir = path.dirname(targetPath)
-        console.log(targetDir)
+        // console.log(targetDir)
         
         await ensureDir(targetDir);
         await rename(sourcePath, targetPath);
@@ -59,7 +59,7 @@ async function splitFileInFolder(directoryPath) {
         // }
 
         lastTime = fileTime;
-    }
+    } // for (const file of files) {
   })
 }
 

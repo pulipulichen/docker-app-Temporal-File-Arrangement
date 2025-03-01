@@ -4,28 +4,33 @@ const util = require('util');
 const ExifParser = require('exif-parser');
 
 const stat = util.promisify(fs.stat);
-const mkdir = util.promisify(fs.mkdir);
-const rename = util.promisify(fs.rename);
-const readdir = util.promisify(fs.readdir);
+// const mkdir = util.promisify(fs.mkdir);
+// const rename = util.promisify(fs.rename);
+// const readdir = util.promisify(fs.readdir);
 const readFile = util.promisify(fs.readFile);
 
 // 目標 bundle 資料夾名稱
-const BUNDLE_FOLDER = 'bundle';
+// const BUNDLE_FOLDER = 'bundle';
 
 function extractDateFromFilename(filename) {
   // Define regex patterns for different formats
   const patterns = [
       /^(\d{4})-(\d{2})-(\d{2})_(\d{2})\.(\d{2})\.(\d{2})/, // Format: 2024-08-31_03.37.52.jpg
-      // /^IMG_(\d{8})_(\d{9})/, // Format: IMG_20240628_170635445.jpg
-      /^(\d{4})(\d{2})(\d{2})/ // Format: 20240831 aaa.jpg
+      /^IMG_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})(\d{3})/, // Format: IMG_20240628_170635445.jpg
+      // /^(\d{4})(\d{2})(\d{2})/ // Format: 20240831 aaa.jpg
+      /^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/,  // Format: 20240919_152647.jpg
+      /^Screenshot_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/  // Format: Screenshot_20250301_153251_Settings.png
   ];
 
   for (const pattern of patterns) {
       const match = filename.match(pattern);
       if (match) {
-          let year, month, day, hour = "00", minute = "00", second = "00";
+          let year, month, day, hour = "00", minute = "00", second = "00", millisecond = '000';
 
-          if (match.length >= 4) { 
+          if (match.length >= 8) {
+            [ , year, month, day, hour, minute, second, millisecond ] = match;
+          }
+          else if (match.length >= 4) { 
               // Format: 2024-08-31_03.37.52
               [_, year, month, day] = match;
               if (match.length >= 7) { 
@@ -33,9 +38,14 @@ function extractDateFromFilename(filename) {
                   minute = match[5];
                   second = match[6];
               }
-          } else { 
+          } 
+          else { 
               // Format: 20240831 aaa
               [_, year, month, day] = match;
+          }
+
+          if (year < 1986) {
+            continue
           }
 
           return new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}Z`);

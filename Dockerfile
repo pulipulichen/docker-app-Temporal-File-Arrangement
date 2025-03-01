@@ -6,4 +6,7 @@ RUN npm link axios@0.21.1
 RUN apt-get update
 RUN apt-get install -y curl
 
+RUN apt-get install -y ffmpeg
+RUN npm link mime-types@2.1.35
+
 # RUN npm install axios

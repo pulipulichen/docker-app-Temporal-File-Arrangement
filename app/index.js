@@ -19,6 +19,7 @@ const getFilesAndMove = require('./temporal-file-arragnement/getFilesAndMove')
 const splitFileInFolder = require('./temporal-file-arragnement/splitFileInFolder')
 
 const walkEachFolder = require('./temporal-file-arragnement/walkEachFolder')
+const removeEmptyDirectories = require('./temporal-file-arragnement/removeEmptyDirectories')
 
 // -------------------------------------------------------------
 
@@ -48,6 +49,7 @@ let main = async function () {
         console.log(`Finish splitFileInFolder`);
 
         await walkEachFolder(path.join(directoryPath, BUNDLE_FOLDER), async (folderPath) => {
+          await removeEmptyDirectories(folderPath)
           await renameFolder(folderPath)
         })
         console.log(`Finish renameFolder`);
