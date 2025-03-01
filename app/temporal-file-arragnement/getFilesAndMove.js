@@ -52,6 +52,8 @@ async function getFilesAndMove(dir, excludeDir, baseDir) {
                   
                   await ensureDir(path.dirname(targetPath));
                   await rename(sourcePath, targetPath);
+
+                  console.log('移動檔案', sourcePath, targetPath)
               }
         }
         catch (e) {

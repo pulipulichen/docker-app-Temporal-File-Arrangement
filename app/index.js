@@ -40,6 +40,7 @@ let main = async function () {
     try {
       console.log(`Start getFilesAndMove`);
         await getFilesAndMove(directoryPath, BUNDLE_FOLDER);
+        continue
         console.log(`Finish getFilesAndMove`);
         // console.log(files)
         await cleanFolder(directoryPath, BUNDLE_FOLDER)
