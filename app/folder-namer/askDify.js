@@ -22,6 +22,7 @@ async function uploadFile(filePath, yek, user) {
     const formData = new FormData();
 
     const ext = path.extname(filePath).toLocaleLowerCase()
+    console.log(ext, isReadableFileType(ext))
     if (isReadableFileType(ext)) {
       // const fileExtension = path.extname(filePath).slice(1).toLowerCase();
       let contentType = mime.lookup(ext)
