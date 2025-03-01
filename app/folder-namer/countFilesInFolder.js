@@ -1,14 +1,14 @@
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 const util = require('util');
-const ExifParser = require('exif-parser');
+// const ExifParser = require('exif-parser');
 
-const stat = util.promisify(fs.stat);
+// const stat = util.promisify(fs.stat);
 // const mkdir = util.promisify(fs.mkdir);
 // const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);
 
-const getFileCreationTime = require('../temporal-file-arragnement/getFileCreationTime')
+// const getFileCreationTime = require('../temporal-file-arragnement/getFileCreationTime')
 const isExcluded = require('../temporal-file-arragnement/isExcluded')
 
 // 取得所有檔案（排除 bundle）

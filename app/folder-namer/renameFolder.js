@@ -79,12 +79,14 @@ ${folderContext}`)
           (await countFilesInFolder(directoryPath)).length === 1) {
           fs.renameSync(path.join(directoryPath, renamedFolderName), path.join(path.dirname(directoryPath), renamedFolderName))
           fs.rmdirSync(directoryPath)
+          console.log('移動目錄：', path.join(path.dirname(directoryPath), renamedFolderName))
       }
       else {
         fs.renameSync(directoryPath, renamedFolderPath)
+        console.log('重新命名目錄', renamedFolderPath)
       }
     }
-    
+
     // =================================================================
   } catch (err) {
       console.error("Error:", err);
