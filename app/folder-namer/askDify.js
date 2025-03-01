@@ -6,10 +6,12 @@ const fs = require('fs');
 const path = require('path');
 
 const API_HOST = '192.168.100.202';
-const API_PATH = '/v1/chat-messages';
+const API_PATH = '/v1/workflows/run';
 const YEK = 'app-oNLncwOFIZ0rO2sxH237amkd'
+const USER_ID = 'abc-123'
 
-const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
+const API_FILE_UPLOAD_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
+const API_LLM_URL = `http://${API_HOST}${API_PATH}`; // 替換為你的 Workflow ID
 const mime = require('mime-types')
 
 const isReadableFileType = require('./isReadableFileType')
@@ -36,7 +38,7 @@ async function uploadFile(filePath, yek, user) {
     // console.log('不行嗎？',)
 
     const response = await axios.post(
-      'http://192.168.100.202/v1/files/upload',
+      API_FILE_UPLOAD_URL,
       formData,
       {
         headers: {
@@ -90,7 +92,7 @@ async function executeWorkflow(document_id, yek, user, context) {
     // console.log(headers)
 
     const response = await axios.post(
-      'http://192.168.100.202/v1/workflows/run',
+      API_LLM_URL,
       data,
       {
         headers
@@ -108,11 +110,11 @@ async function executeWorkflow(document_id, yek, user, context) {
 }
 
 async function askDify(filePath, context) {
-  console.log('Test ok: ', filePath);
-  return ''
-  
-  let document_id = await uploadFile(filePath, YEK, 'abc-123')
-  return await executeWorkflow(document_id, YEK, 'abc-123', context);
+  // console.log('Test ok: ', filePath);
+  // return ''
+
+  let document_id = await uploadFile(filePath, YEK, USER_ID)
+  return await executeWorkflow(document_id, YEK, USER_ID, context);
 }
 
 module.exports = askDify
