@@ -8,8 +8,8 @@ const stat = util.promisify(fs.stat);
 // const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);
 
-const getFileCreationTime = require('./getFileCreationTime')
-const isExcluded = require('./isExcluded')
+const getFileCreationTime = require('../temporal-file-arragnement/getFileCreationTime')
+const isExcluded = require('../temporal-file-arragnement/isExcluded')
 
 // 取得所有檔案（排除 bundle）
 async function countFilesInFolder(dir) {
