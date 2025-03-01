@@ -121,7 +121,7 @@ async function askDify(filePath, context) {
     }
   }
 
-  return ''
+  // return ''
 
   let document_id = await uploadFile(filePath, YEK, USER_ID)
   return await executeWorkflow(document_id, YEK, USER_ID, context);
