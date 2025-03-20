@@ -54,7 +54,7 @@ async function uploadFile(filePath, yek, user) {
       }
     );
 
-    // console.log('Upload successful:', response.data);
+    console.log('Upload successful:', response.data);
     return response.data.id;
   } 
   catch (error) {
