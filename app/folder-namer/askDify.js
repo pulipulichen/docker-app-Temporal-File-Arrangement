@@ -32,13 +32,14 @@ async function uploadFile(filePath, yek, user) {
       if (["application/msword"].includes(contentType)) {
         contentType = "application/octet-stream"
       }
-
-      if (contentType !== false) {
-        formData.append('file', fileStream, {
-          contentType: contentType,
-          filename: path.basename(filePath),
-        });
+      if (contentType === false) {
+        contentType = "application/octet-stream"
       }
+      
+      formData.append('file', fileStream, {
+        contentType: contentType,
+        filename: path.basename(filePath),
+      });
     }
       
     formData.append('user', user);
