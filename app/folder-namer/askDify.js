@@ -112,7 +112,7 @@ async function executeWorkflow(document_id, yek, user, context) {
     console.log('Upload successful:', output);
     return output;
   } catch (error) {
-    console.error('Upload failed:', error.response ? error.response.data : error.message);
+    console.error('Workflow failed:', error.response ? error.response.data : error.message);
     // throw error; // Re-throw the error to be handled by the caller, if needed
     await sleep(30000)
     return await executeWorkflow(document_id, yek, user, context)
