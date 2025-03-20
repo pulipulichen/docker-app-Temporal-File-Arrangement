@@ -27,7 +27,10 @@ async function uploadFile(filePath, yek, user) {
       // const fileExtension = path.extname(filePath).slice(1).toLowerCase();
       const ext = path.extname(filePath).toLocaleLowerCase()
       let contentType = mime.lookup(ext)
-      console.log({contentType})
+      // console.log({contentType})
+      if (["application/msword"].inArray(contentType)) {
+        contentType = "application/octet-stream"
+      }
       if (contentType !== false) {
         formData.append('file', fileStream, {
           contentType: contentType,
