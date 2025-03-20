@@ -113,9 +113,10 @@ async function executeWorkflow(document_id, yek, user, context) {
     return output;
   } catch (error) {
     console.error('Workflow failed:', error.response ? error.response.data : error.message);
-    // throw error; // Re-throw the error to be handled by the caller, if needed
-    await sleep(30000)
-    return await executeWorkflow(document_id, yek, user, context)
+    await sleep(3000)
+    throw error; // Re-throw the error to be handled by the caller, if needed
+    // await sleep(30000)
+    // return await executeWorkflow(document_id, yek, user, context)
   }
 }
 
