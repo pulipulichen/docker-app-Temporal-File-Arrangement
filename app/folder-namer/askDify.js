@@ -15,6 +15,7 @@ const API_LLM_URL = `http://${API_HOST}${API_PATH}`; // 替換為你的 Workflow
 const mime = require('mime-types')
 
 const isReadableFileType = require('./isReadableFileType')
+const sleep = require('./../lib/sleep')
 
 async function uploadFile(filePath, yek, user) {
   try {
@@ -112,7 +113,9 @@ async function executeWorkflow(document_id, yek, user, context) {
     return output;
   } catch (error) {
     console.error('Upload failed:', error.response ? error.response.data : error.message);
-    throw error; // Re-throw the error to be handled by the caller, if needed
+    // throw error; // Re-throw the error to be handled by the caller, if needed
+    await sleep(30000)
+    return await executeWorkflow(document_id, yek, user, context)
   }
 }
 
