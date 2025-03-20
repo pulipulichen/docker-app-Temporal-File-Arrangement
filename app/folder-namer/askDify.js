@@ -8,7 +8,7 @@ const path = require('path');
 const API_HOST = '192.168.100.202';
 const API_PATH = '/v1/workflows/run';
 const YEK = 'app-oNLncwOFIZ0rO2sxH237amkd'
-const USER_ID = 'abc-123'
+const USER_ID = 'abc-456'
 
 const API_FILE_UPLOAD_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
 const API_LLM_URL = `http://${API_HOST}${API_PATH}`; // 替換為你的 Workflow ID
