@@ -29,8 +29,7 @@ const READABLE_FILE_TYPE_LIST = [
   '.wmv',
   '.mkv',
   '.pages',
-  '.plist',
-  '.apple'
+  '.plist'
 ]
 
 const isReadableFileType = function(fileName) {
