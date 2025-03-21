@@ -32,6 +32,10 @@ async function renameFolder(directoryPath) {
     // =================================================================
 
     let middleFile = await findMiddleFile(files, directoryPath)
+    if (!middleFile) {
+      console.log("找不到建立時間最中間的檔案。")
+      return false
+    }
     // if (middleFile) {
     //   middleFile = path.join(directoryPath, middleFile)
     // }

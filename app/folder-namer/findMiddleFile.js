@@ -21,7 +21,7 @@ async function findMiddleFile(files, directoryPath) {
     }
     catch (e) {
       console.error("Error getting file metadata:", e);
-      console.log({directoryPath, file: files[0]})
+      // console.log({directoryPath, file: files[0]})
       return null;
     }
   }
