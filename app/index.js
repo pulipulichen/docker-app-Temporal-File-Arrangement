@@ -46,7 +46,7 @@ let main = async function () {
         await cleanFolder(directoryPath, BUNDLE_FOLDER)
         console.log(`Finish cleanFolder`);
 
-        // await splitFileInFolder(path.join(directoryPath, BUNDLE_FOLDER), BUNDLE_FOLDER);
+        await splitFileInFolder(path.join(directoryPath, BUNDLE_FOLDER), BUNDLE_FOLDER);
         console.log(`Finish splitFileInFolder`);
 
         await walkEachFolder(path.join(directoryPath, BUNDLE_FOLDER), async (folderPath) => {
