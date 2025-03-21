@@ -16,7 +16,14 @@ async function findMiddleFile(files, directoryPath) {
   }
 
   if (files.length === 1) {
-    return path.join(directoryPath, files[0].path)
+    try {
+      return path.join(directoryPath, files[0].path)
+    }
+    catch (e) {
+      console.error("Error getting file metadata:", e);
+      console.log({directoryPath, file: files[0]})
+      return null;
+    }
   }
 
   // 依建立時間排序
